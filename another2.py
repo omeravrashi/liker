@@ -5,10 +5,10 @@ import os
 import paho.mqtt.client as mqttClient
 app = Flask(__name__)
 
-broker_address= os.environ.get("mqtt-host",'')
-port = os.environ.get("mqtt-port",'')
-user = os.environ.get("mqtt-user",'')
-password = os.environ.get("mqtt-pwd",'')
+broker_address= str(os.environ.get("mqtt-host",''))
+port = int(os.environ.get("mqtt-port",''))
+user = str(os.environ.get("mqtt-user",''))
+password = str(os.environ.get("mqtt-pwd",''))
 client = mqttClient.Client("Python")
 client.username_pw_set(user, password=password)
 client.connect(broker_address, port=port)
