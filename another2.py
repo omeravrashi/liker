@@ -9,6 +9,7 @@ broker_address= str(os.environ["mqtt-host"])
 port = int(os.environ["mqtt-port"])
 user = str(os.environ["mqtt-user"])
 password = str(os.environ["mqtt-pwd"])
+
 client = mqttClient.Client("Python")
 client.username_pw_set(user, password=password)
 client.connect(broker_address, port=port)
