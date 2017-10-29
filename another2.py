@@ -28,6 +28,7 @@ def addOne():
     if new_json['entry'][0]['changes'][0]['value']['item'] == 'like':
         client.publish('fb-posts-updates', 'Got like!')
         client.disconnect()
+        return ''
 
 
 if __name__ == "__main__":
