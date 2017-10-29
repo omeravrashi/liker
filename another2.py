@@ -27,8 +27,8 @@ def addOne():
     new_json = request.get_json()
     if new_json['entry'][0]['changes'][0]['value']['item'] == 'like':
         mqttc = mqttClient.Client()
-        mqttc.username_pw_set(os.environ.get("MQTT_USER", ''), os.environ.get("MQTT_PWD", ''))
-        mqttc.connect(os.environ.get("MQTT_HOST", ''), int(os.environ.get("MQTT_PORT", 	5001)))
+        mqttc.username_pw_set(os.environ.get("mqtt-user", ''), os.environ.get("mqtt-pwd", ''))
+        mqttc.connect(os.environ.get("mqtt-host", ''), int(os.environ.get("mqtt-port", 	5001)))
         mqttc.publish('fb-posts-updates', 'Got like!')
         mqttc.disconnect()
 
