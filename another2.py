@@ -1,5 +1,5 @@
 from flask import Flask
-from flask import jsonify
+from flask import json
 from flask import request
 import os
 import paho.mqtt.client as mqttClient
@@ -26,11 +26,8 @@ def returnAll():
 def addOne():
     new_json = request.get_json()
     if new_json['entry'][0]['changes'][0]['value']['item'] == 'like':
-        mqttc = mqttClient.Client()
-        mqttc.username_pw_set(os.environ.get("mqtt-user", ''), os.environ.get("mqtt-pwd", ''))
-        mqttc.connect(os.environ.get("mqtt-host", ''), int(os.environ.get("mqtt-port", 	5001)))
-        mqttc.publish('fb-posts-updates', 'Got like!')
-        mqttc.disconnect()
+        client.publish('fb-posts-updates', 'Got like!')
+        client.disconnect()
 
 
 if __name__ == "__main__":
