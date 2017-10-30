@@ -1,5 +1,5 @@
 from flask import Flask
-from flask import json
+from flask import jsonify
 from flask import request
 import os
 import paho.mqtt.client as mqttClient
@@ -16,22 +16,18 @@ client.connect(broker_address, port=port)
 
 json = []
 
-
 @app.route('/', methods=['GET'])
 def returnAll():
-    return request.args.get('hub.challenge')
+    return jsonify({'json': json})
 
 
 @app.route('/', methods=['POST'])
 def addOne():
     new_json = request.get_json()
-    #if new_json['entry'][0]['changes'][0]['value']['item'] == 'like':
-        #client.publish('fb-posts-updates', 'Got like!')
-    client.publish(new_json)
-    client.disconnect()
-    return ''
+    json.append(new_json)
+    client.publish("python/test",str(new_json))
+    return jsonify({'json': json})
 
 
 if __name__ == "__main__":
     app.run(host='0.0.0.0', port=int(os.environ.get("PORT",5000)))
-
