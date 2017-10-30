@@ -25,10 +25,11 @@ def returnAll():
 @app.route('/', methods=['POST'])
 def addOne():
     new_json = request.get_json()
-    if new_json['entry'][0]['changes'][0]['value']['item'] == 'like':
-        client.publish('fb-posts-updates', 'Got like!')
-        client.disconnect()
-        return ''
+    #if new_json['entry'][0]['changes'][0]['value']['item'] == 'like':
+        #client.publish('fb-posts-updates', 'Got like!')
+    client.publish(new_json)
+    client.disconnect()
+    return ''
 
 
 if __name__ == "__main__":
